@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>MERIDIAN</title>
-<link rel="stylesheet" href="meridian.css">
+<link rel="stylesheet" href="meridian_v2.css">
 </head>
 <body>
 <div id="js-debug">JS LOADING...</div>
@@ -14,185 +14,200 @@
 
 <!-- SCREEN: TRAINING -->
 <div class="screen active" id="screen-training">
-<div class="top-bar">
-  <div class="logo-wrap">
-    <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
-      <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
-      <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
-      <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
-    </svg>
-    <div class="logo-text">MERIDIAN</div>
+  <div class="top-bar">
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
+        <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+        <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
+        <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
+      </svg>
+      <div class="logo-text">MERIDIAN</div>
+    </div>
+    <div class="mp-balance"><div class="mp-icon"></div><div class="mp-val" id="mp-balance">0 MP</div></div>
   </div>
-  <div class="mp-balance"><div class="mp-icon"></div><div class="mp-val" id="mp-balance">0 MP</div></div>
-</div>
-<div class="hero">
-  <div class="hero-content">
-    <div class="hero-label">Jusqu'au 15 Juillet 2026</div>
-    <div class="hero-title" id="hero-program-title">Upper Body<br>Power</div>
-    <button class="hero-cta" id="btn-scroll">COMMENCER</button>
+
+  <!-- CALENDAR VIEW -->
+  <div id="view-calendar">
+    <div class="level-bar">
+      <div class="level-info">
+        <div class="level-txt">Niveau <span id="user-level">1</span></div>
+        <div class="level-txt"><span id="xp-current">0</span> / <span id="xp-next">500</span> XP</div>
+      </div>
+      <div class="level-track"><div class="level-fill" id="level-fill" style="width:0%"></div></div>
+    </div>
+    <div class="countdown-bar">
+      <div class="countdown-label">Fin du programme</div>
+      <div class="countdown-val" id="countdown-timer">-- jours</div>
+    </div>
+    <div class="streak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span id="streak-count">Streak: 0 jours</span></div>
+    <div class="sec-head">
+      <div class="sec-title">Programme</div>
+      <div class="sec-count">30 jours</div>
+    </div>
+    <div id="calendar-list"></div>
   </div>
-</div>
-<div class="level-bar">
-  <div class="level-info"><div class="level-txt">Niveau <span id="user-level">1</span></div><div class="level-txt"><span id="xp-current">0</span> / <span id="xp-next">500</span> XP</div></div>
-  <div class="level-track"><div class="level-fill" id="level-fill" style="width:0%"></div></div>
-</div>
-<div class="countdown-bar">
-  <div class="countdown-label">Fin du programme</div>
-  <div class="countdown-val" id="countdown-timer">-- jours</div>
-</div>
-<div class="streak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg><span id="streak-count">Streak: 0 jours</span></div>
-<div class="sec-head"><div class="sec-title">Choisir ta seance</div></div>
-<div class="day-selector">
-  <button class="day-pill active" data-day="A">Jour A Push</button>
-  <button class="day-pill" data-day="B">Jour B Pull</button>
-  <button class="day-pill" data-day="C">Jour C Cardio</button>
-  <button class="day-pill" data-day="D">Jour D Abdos</button>
-</div>
-<div class="sec-head"><div class="sec-title" id="ex-title">Jour A — Push</div><div class="sec-count" id="ex-count">0/6</div></div>
-<div id="ex-list"></div>
+
+  <!-- SESSION VIEW -->
+  <div id="view-session" style="display:none">
+    <div class="session-header">
+      <button id="btn-back-session" class="btn-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Retour
+      </button>
+      <div class="session-title-block">
+        <span id="session-icon" class="session-icon-big"></span>
+        <div>
+          <div class="session-title-txt" id="session-title">--</div>
+          <div class="session-date-txt" id="session-date">--</div>
+        </div>
+      </div>
+      <div class="session-progress-bar">
+        <div class="session-progress-fill" id="session-progress-fill" style="width:0%"></div>
+      </div>
+      <div class="session-progress-label" id="session-progress-txt">0/0 exercices</div>
+    </div>
+    <div id="session-ex-list"></div>
+    <div id="session-finish-wrap" style="display:none;padding:20px 24px;">
+      <div class="finish-msg">🎉 Seance complete !</div>
+      <button class="btn-p btn-v" style="width:100%;margin-top:12px;" onclick="closeSession()">RETOUR AU PROGRAMME</button>
+    </div>
+  </div>
 </div>
 
 <!-- SCREEN: SHOP -->
 <div class="screen" id="screen-shop">
-<div class="top-bar">
-  <div class="logo-wrap">
-    <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
-      <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
-      <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
-      <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
-    </svg>
-    <div class="logo-text">BOUTIQUE</div>
+  <div class="top-bar">
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
+        <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+        <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
+        <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
+      </svg>
+      <div class="logo-text">BOUTIQUE</div>
+    </div>
+    <div class="mp-balance"><div class="mp-icon"></div><div class="mp-val" id="mp-balance-shop">0 MP</div></div>
   </div>
-  <div class="mp-balance"><div class="mp-icon"></div><div class="mp-val" id="mp-balance-shop">0 MP</div></div>
-</div>
-<div class="sec-head"><div class="sec-title">Categories</div></div>
-<div class="shop-cats">
-  <button class="shop-cat a" data-cat="all">Tout</button>
-  <button class="shop-cat" data-cat="snack">Snack</button>
-  <button class="shop-cat" data-cat="clothes">Vetements</button>
-  <button class="shop-cat" data-cat="shoes">Chaussures</button>
-  <button class="shop-cat" data-cat="other">Autres</button>
-</div>
-<div class="shop-grid" id="shop-grid"></div>
-<div style="height:40px"></div>
-<div class="sec-head"><div class="sec-title">Inventaire</div></div>
-<div class="hist-list" id="inventory-list" style="padding-bottom:20px"></div>
+  <div class="sec-head"><div class="sec-title">Categories</div></div>
+  <div class="shop-cats">
+    <button class="shop-cat a" data-cat="all">Tout</button>
+    <button class="shop-cat" data-cat="snack">Snack</button>
+    <button class="shop-cat" data-cat="clothes">Vetements</button>
+    <button class="shop-cat" data-cat="shoes">Chaussures</button>
+    <button class="shop-cat" data-cat="other">Autres</button>
+  </div>
+  <div class="shop-grid" id="shop-grid"></div>
+  <div style="height:40px"></div>
+  <div class="sec-head"><div class="sec-title">Inventaire</div></div>
+  <div class="hist-list" id="inventory-list" style="padding-bottom:20px"></div>
 </div>
 
 <!-- SCREEN: PROFILE -->
 <div class="screen" id="screen-profile">
-<div class="top-bar">
-  <div class="logo-wrap">
-    <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
-      <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
-      <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
-      <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
-    </svg>
-    <div class="logo-text">PROFIL</div>
+  <div class="top-bar">
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
+        <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+        <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
+        <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
+      </svg>
+      <div class="logo-text">PROFIL</div>
+    </div>
+    <div class="mp-balance"><div class="mp-icon"></div><div class="mp-val" id="mp-balance-profile">0 MP</div></div>
   </div>
-  <div class="mp-balance"><div class="mp-icon"></div><div class="mp-val" id="mp-balance-profile">0 MP</div></div>
-</div>
-<div class="sec-head"><div class="sec-title">Statistiques</div></div>
-<div class="stats-grid">
-  <div class="stat-card"><div class="stat-v" id="stat-workouts">0</div><div class="stat-l">Seances</div></div>
-  <div class="stat-card"><div class="stat-v" id="stat-minutes">0</div><div class="stat-l">Minutes</div></div>
-  <div class="stat-card"><div class="stat-v" id="stat-mp-earned">0</div><div class="stat-l">MP Gagnes</div></div>
-  <div class="stat-card"><div class="stat-v" id="stat-streak">0</div><div class="stat-l">Streak Jours</div></div>
-</div>
-<div class="sec-head"><div class="sec-title">Historique</div></div>
-<div class="hist-list" id="hist-list"></div>
+  <div class="sec-head"><div class="sec-title">Statistiques</div></div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-v" id="stat-workouts">0</div><div class="stat-l">Seances</div></div>
+    <div class="stat-card"><div class="stat-v" id="stat-minutes">0</div><div class="stat-l">Minutes</div></div>
+    <div class="stat-card"><div class="stat-v" id="stat-mp-earned">0</div><div class="stat-l">MP Gagnes</div></div>
+    <div class="stat-card"><div class="stat-v" id="stat-streak">0</div><div class="stat-l">Streak Jours</div></div>
+  </div>
+  <div class="sec-head"><div class="sec-title">Historique</div></div>
+  <div class="hist-list" id="hist-list"></div>
 </div>
 
 <!-- SCREEN: SETTINGS -->
 <div class="screen" id="screen-settings">
-<div class="top-bar">
-  <div class="logo-wrap">
-    <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
-      <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
-      <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
-      <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
-    </svg>
-    <div class="logo-text">PARAMETRES</div>
+  <div class="top-bar">
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 40 40" fill="none">
+        <path d="M20 2L2 12v16l18 10 18-10V12L20 2z" stroke="#94a3b8" stroke-width="1.5" fill="none"/>
+        <path d="M20 8L8 14.5v11L20 32l12-6.5v-11L20 8z" stroke="#94a3b8" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M20 14l-6 3.5v7L20 28l6-3.5v-7L20 14z" stroke="#cbd5e1" stroke-width="1.5" fill="rgba(203,213,225,0.1)"/>
+        <circle cx="20" cy="20" r="3" fill="#cbd5e1"/>
+      </svg>
+      <div class="logo-text">PARAMETRES</div>
+    </div>
+  </div>
+  <div style="padding:24px;">
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-0.01em;text-transform:uppercase;">Meridian Points</div>
+    <p style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:24px;font-weight:500;">1 MP = 0.01 EUR. Gagne des MP en completant tes exercices. Le programme se termine le 15 juillet 2026.</p>
+    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-0.01em;text-transform:uppercase;">Splits</div>
+    <p style="font-size:14px;color:var(--text-dim);line-height:1.8;font-weight:500;">
+      💪 Pectoraux — 4 exercices machines<br>
+      🏋️ Dos — 4 exercices machines<br>
+      🎯 Epaules — 4 exercices machines<br>
+      ⚡ Bras — 4 exercices machines<br>
+      🔥 Abdos + Cardio — 5 exercices<br><br>
+      Cycle sur 5 jours, repos le dimanche.<br>
+      Streak bonus: +10% MP par jour consecutif.
+    </p>
+    <button class="btn-p" id="btn-reset" style="margin-top:30px;width:100%;">REINITIALISER LA PROGRESSION</button>
   </div>
 </div>
-<div style="padding:24px;">
-  <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-0.01em;text-transform:uppercase;">A propos de Meridian Points</div>
-  <p style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:24px;font-weight:500;">1 MP = 0.01 EUR (1 centime). Gagne des MP en completant tes exercices et echange-les contre des recompenses dans la boutique. Le programme se termine mi-juillet.</p>
-  <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:16px;letter-spacing:-0.01em;text-transform:uppercase;">Regles</div>
-  <p style="font-size:14px;color:var(--text-dim);line-height:1.7;font-weight:500;">
-    - Jour A: Push (pecs, epaules, triceps) — MACHINES UNIQUEMENT.<br>
-    - Jour B: Pull (dos, biceps) — MACHINES UNIQUEMENT.<br>
-    - Jour C: Cardio — Tapis, Stepper, Rameur, Velo elliptique.<br>
-    - Jour D: Abdos — MACHINES UNIQUEMENT.<br>
-    - Completer un exercice = MP + XP.<br>
-    - Streak bonus: +10% MP par jour consecutif.<br>
-    - 1 MP = 0.01 EUR.
-  </p>
-  <button class="btn-p" id="btn-reset" style="margin-top:30px;width:100%;">REINITIALISER LA PROGRESSION</button>
-</div>
-</div>
 
+<!-- NAV -->
 <nav class="nav">
-<button class="nav-item a" data-screen="training">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-  Training
-</button>
-<button class="nav-item" data-screen="shop">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-  Boutique
-</button>
-<button class="nav-item" data-screen="profile">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-  Profil
-</button>
-<button class="nav-item" data-screen="settings">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l-.06-.06a1.65 1.65 0 00-.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-  Plus
-</button>
+  <button class="nav-item a" data-screen="training">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+    Training
+  </button>
+  <button class="nav-item" data-screen="shop">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    Boutique
+  </button>
+  <button class="nav-item" data-screen="profile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Profil
+  </button>
+  <button class="nav-item" data-screen="settings">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l-.06-.06a1.65 1.65 0 00-.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+    Plus
+  </button>
 </nav>
 
+<!-- WORKOUT TIMER -->
 <div class="workout" id="workout">
-<div class="w-head"><div class="w-title">Exercice en cours</div><button class="w-close" id="w-close">&times;</button></div>
-<div class="w-body">
-  <div class="timer" id="timer">00:00<span class="ms">.00</span></div>
-  <div class="w-name" id="w-name">--</div>
-  <div class="w-info" id="w-info">--</div>
-  <div class="w-prog"><div class="w-prog-bar" id="w-prog-bar"></div></div>
-  <div class="w-actions">
-    <button class="btn-p btn-v" id="btn-complete">EXERCICE TERMINE</button>
-    <button class="btn-s" id="btn-cancel">Annuler</button>
+  <div class="w-head"><div class="w-title">Exercice en cours</div><button class="w-close" id="w-close">&times;</button></div>
+  <div class="w-body">
+    <div class="timer" id="timer">00:00<span class="ms">.00</span></div>
+    <div class="w-name" id="w-name">--</div>
+    <div class="w-info" id="w-info">--</div>
+    <div class="w-prog"><div class="w-prog-bar" id="w-prog-bar"></div></div>
+    <div class="w-actions">
+      <button class="btn-p btn-v" id="btn-complete">EXERCICE TERMINE</button>
+      <button class="btn-s" id="btn-cancel">Annuler</button>
+    </div>
   </div>
 </div>
-</div>
 
+<!-- COMPLETION MODAL -->
 <div class="comp" id="comp">
-<div class="comp-card">
-  <div class="comp-head"><div class="comp-title">Exercice Complete</div><div class="comp-sub" id="comp-sub">--</div></div>
-  <div class="comp-mp"><div class="mp-icon"></div><div class="mp-earn" id="comp-mp">+0 MP</div></div>
-  <div class="fg"><label class="fl">Poids / Resistance (kg)</label><input type="number" class="fi" id="input-weight" placeholder="Ex: 45"></div>
-  <div class="fg"><label class="fl">Ressenti</label><div class="rg"><button class="rb" data-r="1">Facile</button><button class="rb sel" data-r="2">Moyen</button><button class="rb" data-r="3">Dur</button></div></div>
-  <div class="fg"><label class="fl">Duree: <span id="comp-time">00:00</span></label></div>
-  <button class="btn-p btn-v" id="btn-submit">VALIDER & GAGNER MP</button>
-</div>
-</div>
-
-<div class="info-modal" id="info-modal">
-<div class="info-card">
-  <h3 id="info-title">--</h3>
-  <p id="info-desc">--</p>
-  <div id="info-details"></div>
-  <button class="btn-p" id="btn-info-close" style="width:100%;margin-top:20px;">Fermer</button>
-</div>
+  <div class="comp-card">
+    <div class="comp-head"><div class="comp-title">Exercice Complete</div><div class="comp-sub" id="comp-sub">--</div></div>
+    <div class="comp-mp"><div class="mp-icon"></div><div class="mp-earn" id="comp-mp">+0 MP</div></div>
+    <div class="fg"><label class="fl">Poids / Resistance (kg)</label><input type="number" class="fi" id="input-weight" placeholder="Ex: 45"></div>
+    <div class="fg"><label class="fl">Ressenti</label><div class="rg"><button class="rb" data-r="1">Facile</button><button class="rb sel" data-r="2">Moyen</button><button class="rb" data-r="3">Dur</button></div></div>
+    <div class="fg"><label class="fl">Duree: <span id="comp-time">00:00</span></label></div>
+    <button class="btn-p btn-v" id="btn-submit">VALIDER & GAGNER MP</button>
+  </div>
 </div>
 
 <div class="toast" id="toast"><div class="mp-icon"></div><div class="toast-txt" id="toast-txt">Notification</div></div>
 
 </div>
-
-<script src="meridian.js"></script>
+<script src="meridian_v2.js"></script>
 </body>
 </html>
