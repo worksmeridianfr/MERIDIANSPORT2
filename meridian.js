@@ -1,42 +1,62 @@
-/* MERIDIAN APP - ARCTIC THEME - FIXED */
+/* MERIDIAN APP v2 — MUSCLE SPLITS + WEEKLY CALENDAR UI */
 var PROGRAM_END = new Date("2026-07-15T23:59:59");
 var MP_BASE = 180;
 var STREAK_BONUS = 0.10;
 var XP_EXO = 50;
 var XP_LVL = 500;
 
+/* ── PROGRAMME : 5 splits musculaires, pas de jambes ── */
 var EXO = {
-  A: [
-    {id:"a1",name:"Developpe couche machine",muscle:"Pectoraux",cat:"Push",sets:"4x10",rest:"90s",mp:MP_BASE,info:"Machine guidee. Regle la hauteur pour que les poignees soient au niveau des pecs. Pousse en expirant."},
-    {id:"a2",name:"Developpe incline machine",muscle:"Pectoraux haut",cat:"Push",sets:"3x12",rest:"75s",mp:MP_BASE,info:"Incline 30-45°. Machine Smith ou presse inclinee. Concentre-toi sur la partie haute des pecs."},
-    {id:"a3",name:"Elevation laterale machine",muscle:"Epaules",cat:"Push",sets:"4x12",rest:"60s",mp:MP_BASE,info:"Machine laterale ou cable. Bras legerement flechis. Monte jusqu'a l'horizontal."},
-    {id:"a4",name:"Presse militaire machine",muscle:"Epaules",cat:"Push",sets:"4x8",rest:"90s",mp:MP_BASE+20,info:"Presse epaules machine ou Smith. Dos colle au dossier. Ne bloque pas les coudes en haut."},
-    {id:"a5",name:"Extension triceps machine",muscle:"Triceps",cat:"Push",sets:"3x15",rest:"60s",mp:MP_BASE,info:"Machine extension ou cable poulie haute. Coudes fixes le long du corps."},
-    {id:"a6",name:"Dips assistes machine",muscle:"Triceps / Pecs",cat:"Push",sets:"3x10",rest:"75s",mp:MP_BASE+20,info:"Machine dips assistee. Penche-toi legerement pour viser les pecs, droit pour les triceps."}
-  ],
-  B: [
-    {id:"b1",name:"Tirage vertical machine",muscle:"Dos (lats)",cat:"Pull",sets:"4x10",rest:"90s",mp:MP_BASE,info:"Tirage vertical prise large. Tire jusqu'en bas du pecs. Contracte les lats."},
-    {id:"b2",name:"Rowing machine",muscle:"Dos (milieu)",cat:"Pull",sets:"4x10",rest:"90s",mp:MP_BASE,info:"Rowing machine ou chest-supported. Rentre les coudes vers l'arriere. Garde le dos droit."},
-    {id:"b3",name:"Tirage horizontal machine",muscle:"Dos (epaisseur)",cat:"Pull",sets:"3x12",rest:"75s",mp:MP_BASE,info:"Machine row assis. Prise neutre ou pronation. Tire vers le nombril."},
-    {id:"b4",name:"Curl biceps machine",muscle:"Biceps",cat:"Pull",sets:"4x12",rest:"60s",mp:MP_BASE,info:"Machine curl ou pupitre. Coudes fixes. Monte sans balancer."},
-    {id:"b5",name:"Curl marteau machine",muscle:"Biceps / Avant-bras",cat:"Pull",sets:"3x12",rest:"60s",mp:MP_BASE,info:"Machine curl prise neutre. Travaille le brachial et l'avant-bras."},
-    {id:"b6",name:"Face pull machine",muscle:"Rear delts / Dos",cat:"Pull",sets:"3x15",rest:"60s",mp:MP_BASE,info:"Cable poulie haute. Tire vers le visage. Coudes hauts. Exterieur des epaules."}
-  ],
-  C: [
-    {id:"c1",name:"Tapis de course",muscle:"Cardio / Full body",cat:"Cardio",sets:"20 min",rest:"-",mp:MP_BASE+40,info:"Course moderee 70-75% FCmax. Incline leger si possible. Respiration reguliere."},
-    {id:"c2",name:"Stepper",muscle:"Cardio / Jambes",cat:"Cardio",sets:"15 min",rest:"-",mp:MP_BASE+20,info:"Stepper machine. Maintiens un rythme constant. Ne te tiens pas aux barres."},
-    {id:"c3",name:"Rameur",muscle:"Cardio / Dos",cat:"Cardio",sets:"10 min",rest:"-",mp:MP_BASE+40,info:"Rameur concept2. Jambes-dos-bras. Explosion sur les jambes, fini avec le dos."},
-    {id:"c4",name:"Velo elliptique",muscle:"Cardio / Full body",cat:"Cardio",sets:"20 min",rest:"-",mp:MP_BASE+20,info:"Velo elliptique. Bras et jambes ensemble. Resistance moderee."},
-    {id:"c5",name:"HIIT Bike",muscle:"Cardio / Jambes",cat:"Cardio",sets:"15 min",rest:"-",mp:MP_BASE+60,info:"Velo assis. 30s intense / 30s lent x 15. Explose sur les phases courtes."}
-  ],
-  D: [
-    {id:"d1",name:"Crunch machine",muscle:"Abdominaux",cat:"Abdos",sets:"4x15",rest:"45s",mp:MP_BASE,info:"Machine abdominaux. Roule le buste vers les genoux. Ne tire pas avec le cou."},
-    {id:"d2",name:"Rotation abdos machine",muscle:"Obliques",cat:"Abdos",sets:"3x15",rest:"45s",mp:MP_BASE,info:"Machine rotation ou cable. Tourne le buste. Controle le mouvement."},
-    {id:"d3",name:"Levage de jambes machine",muscle:"Abdos bas",cat:"Abdos",sets:"3x12",rest:"60s",mp:MP_BASE,info:"Machine levage de jambes ou chaise romaine. Monte les jambes a 90°."},
-    {id:"d4",name:"Planche avec poids",muscle:"Core",cat:"Abdos",sets:"3x45s",rest:"60s",mp:MP_BASE+20,info:"Planche sur avant-bras. Ajoute un disque sur le dos si trop facile. Dos neutre."},
-    {id:"d5",name:"Abdos declines machine",muscle:"Abdos haut",cat:"Abdos",sets:"3x12",rest:"60s",mp:MP_BASE,info:"Banc decline avec machine ou poids. Descends lentement, remonte en expirant."}
-  ]
+  CHEST: {
+    label: "Pectoraux", icon: "💪", color: "#6366f1",
+    exos: [
+      {id:"ch1",name:"Developpe couche machine",muscle:"Pectoraux",sets:"4x10",rest:"90s",mp:MP_BASE,info:"Machine guidee. Regle la hauteur pour que les poignees soient au niveau des pecs. Pousse en expirant, descends lentement."},
+      {id:"ch2",name:"Developpe incline machine",muscle:"Pectoraux haut",sets:"3x12",rest:"75s",mp:MP_BASE,info:"Incline 30-45°. Machine Smith ou presse inclinee. Concentre-toi sur la contraction de la partie haute des pecs."},
+      {id:"ch3",name:"Pec deck / Butterfly machine",muscle:"Pectoraux internes",sets:"4x12",rest:"60s",mp:MP_BASE,info:"Machine butterfly. Coudes legerement flechis. Resserre les pecs en fermeture, etire bien en ouverture."},
+      {id:"ch4",name:"Dips assistes machine",muscle:"Pectoraux / Triceps",sets:"3x10",rest:"75s",mp:MP_BASE+20,info:"Machine dips assistee. Penche-toi legerement en avant pour viser les pecs. Descends jusqu'au parallelisme."}
+    ]
+  },
+  BACK: {
+    label: "Dos", icon: "🏋️", color: "#0ea5e9",
+    exos: [
+      {id:"ba1",name:"Tirage vertical machine",muscle:"Dos (lats)",sets:"4x10",rest:"90s",mp:MP_BASE,info:"Tirage vertical prise large. Tire jusqu'en bas des pecs. Contracte les lats a fond en bas."},
+      {id:"ba2",name:"Rowing machine",muscle:"Dos (milieu)",sets:"4x10",rest:"90s",mp:MP_BASE,info:"Rowing machine ou chest-supported. Rentre les coudes vers l'arriere. Garde le dos droit, pas de balancement."},
+      {id:"ba3",name:"Tirage horizontal machine",muscle:"Dos (epaisseur)",sets:"3x12",rest:"75s",mp:MP_BASE,info:"Machine row assis. Prise neutre ou pronation. Tire vers le nombril. Squeeze en fin de mouvement."},
+      {id:"ba4",name:"Face pull machine",muscle:"Rear delts / Dos",sets:"3x15",rest:"60s",mp:MP_BASE,info:"Cable poulie haute. Tire vers le visage. Coudes hauts et en dehors. Travaille les deltoïdes posterieurs."}
+    ]
+  },
+  SHOULDERS: {
+    label: "Epaules", icon: "🎯", color: "#f59e0b",
+    exos: [
+      {id:"sh1",name:"Presse militaire machine",muscle:"Epaules (avant)",sets:"4x8",rest:"90s",mp:MP_BASE+20,info:"Presse epaules machine ou Smith. Dos colle au dossier. Ne bloque pas les coudes en haut."},
+      {id:"sh2",name:"Elevation laterale machine",muscle:"Epaules (lateral)",sets:"4x12",rest:"60s",mp:MP_BASE,info:"Machine laterale ou cable. Bras legerement flechis. Monte jusqu'a l'horizontal, pas plus haut."},
+      {id:"sh3",name:"Elevation frontale machine",muscle:"Epaules (avant)",sets:"3x12",rest:"60s",mp:MP_BASE,info:"Cable ou machine. Monte le bras devant toi jusqu'a l'horizontal. Controle la descente."},
+      {id:"sh4",name:"Oiseau machine",muscle:"Epaules (arriere)",sets:"3x15",rest:"60s",mp:MP_BASE,info:"Machine reverse fly ou pec deck inverse. Bras legerement flechis. Ecarte les bras en arriere, serre les omoplates."}
+    ]
+  },
+  ARMS: {
+    label: "Bras", icon: "⚡", color: "#10b981",
+    exos: [
+      {id:"ar1",name:"Curl biceps machine",muscle:"Biceps",sets:"4x12",rest:"60s",mp:MP_BASE,info:"Machine curl ou pupitre. Coudes fixes au sol. Monte sans balancer le buste."},
+      {id:"ar2",name:"Curl marteau machine",muscle:"Biceps / Avant-bras",sets:"3x12",rest:"60s",mp:MP_BASE,info:"Machine curl prise neutre. Travaille le brachial et l'avant-bras en plus du biceps."},
+      {id:"ar3",name:"Extension triceps machine",muscle:"Triceps",sets:"4x15",rest:"60s",mp:MP_BASE,info:"Machine extension ou cable poulie haute. Coudes fixes le long du corps. Etire bien en haut."},
+      {id:"ar4",name:"Triceps corde cable",muscle:"Triceps (lateral)",sets:"3x15",rest:"60s",mp:MP_BASE,info:"Cable poulie haute avec corde. En bas du mouvement, ecarte les deux extremites de la corde. Coudes fixes."}
+    ]
+  },
+  ABS: {
+    label: "Abdos + Cardio", icon: "🔥", color: "#ef4444",
+    exos: [
+      {id:"ab1",name:"Crunch machine",muscle:"Abdominaux",sets:"4x15",rest:"45s",mp:MP_BASE,info:"Machine abdominaux. Roule le buste vers les genoux. Ne tire pas avec le cou. Expire en contractant."},
+      {id:"ab2",name:"Rotation abdos machine",muscle:"Obliques",sets:"3x15",rest:"45s",mp:MP_BASE,info:"Machine rotation ou cable. Tourne le buste lentement. Controle le retour, ne laisse pas aller."},
+      {id:"ab3",name:"Levage de jambes machine",muscle:"Abdos bas",sets:"3x12",rest:"60s",mp:MP_BASE,info:"Machine levage de jambes ou chaise romaine. Monte les jambes a 90°. Controle la descente."},
+      {id:"ab4",name:"Planche avec poids",muscle:"Core",sets:"3x45s",rest:"60s",mp:MP_BASE+20,info:"Planche sur avant-bras. Ajoute un disque sur le dos si trop facile. Dos neutre, pas de cambrure."},
+      {id:"ab5",name:"HIIT Bike",muscle:"Cardio",sets:"15 min",rest:"-",mp:MP_BASE+60,info:"Velo assis. 30s full power / 30s lent x 15. Explose sur les phases intenses, recupère vraiment sur les lentes."}
+    ]
+  }
 };
+
+/* Programme sur 5 semaines : cycle des 5 splits */
+var DAY_ORDER = ["CHEST","BACK","SHOULDERS","ARMS","ABS"];
 
 var SHOP = [
   {id:"kebab",name:"Menu Kebab",price:1000,cat:"snack",emoji:"🥙",desc:"Un menu kebab classique avec frites et boisson",maxQty:10},
@@ -48,20 +68,28 @@ var SHOP = [
 ];
 
 var S = {
-  mp:0,xp:0,level:1,streak:0,lastWorkoutDate:null,workouts:0,minutes:0,mpEarned:0,
-  history:[],inventory:[],completedToday:{},currentDay:"A",currentExo:null,
-  timerStart:0,timerInterval:null,selectedRessenti:2
+  mp:0, xp:0, level:1, streak:0, lastWorkoutDate:null, workouts:0, minutes:0, mpEarned:0,
+  history:[], inventory:[], completedDays:{}, /* completedDays: { "2026-06-01_CHEST": [exoIds...] } */
+  currentExo:null, timerStart:0, timerInterval:null, selectedRessenti:2,
+  /* UI state */
+  view:"calendar",        /* "calendar" | "session" */
+  activeDay:null,         /* "CHEST" | "BACK" | etc. */
+  activeDayDate:null,     /* ISO date string */
+  expandedExo:null        /* exo id currently expanded */
 };
 
 var shopCat = "all";
 var months = ["jan","fev","mar","avr","mai","juin","juil","aout","sept","oct","nov","dec"];
+var jours = ["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"];
 
 function $(id){ return document.getElementById(id); }
 function pad2(n){ return n < 10 ? "0"+n : ""+n; }
+function dateKey(d){ return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate()); }
+function sessionKey(date, split){ return date+"_"+split; }
 
 function load(){
   try {
-    var saved = localStorage.getItem("meridian_state");
+    var saved = localStorage.getItem("meridian_v2_state");
     if(saved){
       var p = JSON.parse(saved);
       for(var k in p){ if(S.hasOwnProperty(k)) S[k] = p[k]; }
@@ -69,11 +97,9 @@ function load(){
     }
   } catch(e){}
 }
-
 function save(){
-  try { localStorage.setItem("meridian_state", JSON.stringify(S)); } catch(e){}
+  try { localStorage.setItem("meridian_v2_state", JSON.stringify(S)); } catch(e){}
 }
-
 function checkStreak(){
   if(!S.lastWorkoutDate) return;
   var last = new Date(S.lastWorkoutDate);
@@ -94,7 +120,6 @@ function updateMP(){
   $("mp-balance-shop").textContent = S.mp + " MP";
   $("mp-balance-profile").textContent = S.mp + " MP";
 }
-
 function updateLevel(){
   var need = S.level * XP_LVL;
   var pct = Math.min(100, (S.xp / need) * 100);
@@ -103,18 +128,15 @@ function updateLevel(){
   $("xp-next").textContent = need;
   $("level-fill").style.width = pct + "%";
 }
-
 function updateStreak(){
   $("streak-count").textContent = "Streak: " + S.streak + " jours";
   $("stat-streak").textContent = S.streak;
 }
-
 function updateCountdown(){
   var diff = PROGRAM_END - new Date();
   if(diff <= 0){ $("countdown-timer").textContent = "Programme termine !"; return; }
   $("countdown-timer").textContent = Math.ceil(diff / (1000*60*60*24)) + " jours restants";
 }
-
 function updateStats(){
   $("stat-workouts").textContent = S.workouts;
   $("stat-minutes").textContent = S.minutes;
@@ -122,116 +144,154 @@ function updateStats(){
   $("stat-streak").textContent = S.streak;
 }
 
-function renderHistory(){
-  var list = $("hist-list");
-  if(S.history.length === 0){
-    list.innerHTML = '<div style="padding:20px 0;text-align:center;color:var(--text-dim);font-size:13px;">Aucun historique encore</div>';
-    return;
+/* ── CALENDAR VIEW ── */
+function buildCalendar(){
+  /* Génère 30 jours depuis aujourd'hui */
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  var days = [];
+  for(var i = 0; i < 30; i++){
+    var d = new Date(today.getTime() + i*86400000);
+    /* Skip dimanche (0) = repos */
+    if(d.getDay() === 0) continue;
+    /* Assigne le split en cycle */
+    var splitIdx = days.length % DAY_ORDER.length;
+    days.push({ date: d, split: DAY_ORDER[splitIdx] });
   }
-  var html = "";
-  for(var i = S.history.length-1; i >= 0; i--){
-    var h = S.history[i], d = new Date(h.date);
-    var ds = d.getDate() + " " + months[d.getMonth()];
-    html += '<div class="hist-item"><div class="hist-left"><div class="hist-ex">' + h.exercise + '</div><div class="hist-meta">' + ds + " · " + h.duration + " · " + h.ressenti + '</div></div><div class="hist-mp"><div class="mp-icon"></div><div class="hv">+' + h.mp + "</div></div></div>";
-  }
-  list.innerHTML = html;
+  return days;
 }
 
-function renderInventory(){
-  var list = $("inventory-list");
-  if(S.inventory.length === 0){
-    list.innerHTML = '<div style="padding:20px 0;text-align:center;color:var(--text-dim);font-size:13px;">Inventaire vide</div>';
-    return;
-  }
-  var g = {}, html = "";
-  for(var i = 0; i < S.inventory.length; i++){
-    var it = S.inventory[i];
-    if(!g[it.id]) g[it.id] = {name:it.name, emoji:it.emoji, price:it.price, qty:0};
-    g[it.id].qty++;
-  }
-  for(var k in g){
-    var it = g[k];
-    html += '<div class="hist-item"><div class="hist-left"><div class="hist-ex">' + it.emoji + ' ' + it.name + '</div><div class="hist-meta">Quantite: ' + it.qty + '</div></div><div class="hist-mp"><div class="mp-icon"></div><div class="hv">' + it.price + ' MP</div></div></div>';
-  }
-  list.innerHTML = html;
+function getSessionDone(dateStr, split){
+  var key = sessionKey(dateStr, split);
+  return S.completedDays[key] || [];
 }
 
-function renderExercises(){
-  var day = S.currentDay, list = EXO[day], container = $("ex-list"), done = S.completedToday[day] || [];
-  $("ex-title").textContent = "Jour " + day + " — " + (day==="A"?"Push":day==="B"?"Pull":day==="C"?"Cardio":"Abdos");
-  $("ex-count").textContent = done.length + "/" + list.length;
-  var titles = {A:"Push Power", B:"Pull Strength", C:"Cardio Burn", D:"Core Blast"};
-  $("hero-program-title").innerHTML = titles[day] + "<br>Session";
+function renderCalendar(){
+  var container = $("calendar-list");
+  var days = buildCalendar();
+  var today = new Date(); today.setHours(0,0,0,0);
   var html = "";
-  for(var i = 0; i < list.length; i++){
-    var ex = list[i], isDone = false;
-    for(var d = 0; d < done.length; d++) if(done[d] === ex.id){ isDone = true; break; }
-    var bonus = Math.floor(ex.mp * (S.streak * STREAK_BONUS));
-    var total = ex.mp + bonus;
-    html += '<div class="ex-card ' + (isDone?"done":"") + '" data-exid="' + ex.id + '">' +
-      '<div class="ex-head"><div class="ex-info"><div class="ex-cat">' + ex.cat + '</div><div class="ex-name">' + ex.name + '</div><div class="ex-muscle">' + ex.muscle + '</div></div>' +
-      '<div class="ex-mp"><div class="mp-icon"></div><div class="mp-txt">' + total + ' MP</div></div></div>' +
-      '<div class="ex-details"><div class="det-item"><div class="det-label">Series</div><div class="det-val">' + ex.sets + '</div></div><div class="det-item"><div class="det-label">Repos</div><div class="det-val">' + ex.rest + '</div></div><div class="det-item"><div class="det-label">Base</div><div class="det-val">' + ex.mp + ' MP</div></div></div>' +
-      '<div class="ex-actions">' +
-      '<button class="btn-p ' + (isDone?"":"btn-v") + ' btn-start" data-exid="' + ex.id + '" ' + (isDone?"disabled":"") + '>' + (isDone?"FAIT":"DEMARRER") + '</button>' +
-      '<button class="btn-s btn-info" data-exid="' + ex.id + '">Infos</button>' +
-      '</div></div>';
+  for(var i = 0; i < days.length; i++){
+    var d = days[i];
+    var dStr = dateKey(d.date);
+    var split = EXO[d.split];
+    var done = getSessionDone(dStr, d.split);
+    var total = split.exos.length;
+    var isToday = d.date.getTime() === today.getTime();
+    var isPast = d.date.getTime() < today.getTime();
+    var isComplete = done.length >= total;
+    var dayLabel = isToday ? "Aujourd'hui" : (isPast ? jours[d.date.getDay()] + " " + d.date.getDate() + " " + months[d.date.getMonth()] : jours[d.date.getDay()] + " " + d.date.getDate() + " " + months[d.date.getMonth()]);
+    var statusClass = isComplete ? "cal-done" : (isToday ? "cal-today" : (isPast ? "cal-past" : ""));
+    html += '<div class="cal-row ' + statusClass + '" data-split="' + d.split + '" data-date="' + dStr + '">' +
+      '<div class="cal-left">' +
+        '<div class="cal-day-label">' + (isToday ? '<span class="today-badge">AUJOURD\'HUI</span>' : dayLabel) + '</div>' +
+        '<div class="cal-split-name">' + split.icon + ' ' + split.label + '</div>' +
+      '</div>' +
+      '<div class="cal-right">' +
+        (isComplete
+          ? '<div class="cal-check">✓</div>'
+          : '<div class="cal-progress">' + done.length + '/' + total + '</div>') +
+        (!isPast || !isComplete ? '<button class="cal-btn" data-split="' + d.split + '" data-date="' + dStr + '">' + (done.length > 0 ? 'REPRENDRE' : 'COMMENCER') + '</button>' : '') +
+      '</div>' +
+    '</div>';
   }
   container.innerHTML = html;
-  // EVENT DELEGATION — pas de getElementById dynamique, un seul listener sur le container
 }
 
-function renderShop(){
-  var grid = $("shop-grid"), items = [];
-  if(shopCat === "all"){ items = SHOP; }
-  else { for(var i = 0; i < SHOP.length; i++) if(SHOP[i].cat === shopCat) items.push(SHOP[i]); }
+/* ── SESSION VIEW ── */
+function openSession(split, dateStr){
+  S.view = "session";
+  S.activeDay = split;
+  S.activeDayDate = dateStr;
+  S.expandedExo = null;
+  var splitData = EXO[split];
+  $("session-title").textContent = splitData.label;
+  $("session-icon").textContent = splitData.icon;
+  var d = new Date(dateStr);
+  $("session-date").textContent = jours[d.getDay()] + " " + d.getDate() + " " + months[d.getMonth()];
+  renderSession();
+  $("view-calendar").style.display = "none";
+  $("view-session").style.display = "block";
+  $("view-session").scrollTop = 0;
+}
+
+function closeSession(){
+  S.view = "calendar";
+  S.activeDay = null;
+  S.activeDayDate = null;
+  S.expandedExo = null;
+  $("view-session").style.display = "none";
+  $("view-calendar").style.display = "block";
+  renderCalendar();
+}
+
+function renderSession(){
+  var split = S.activeDay;
+  var dateStr = S.activeDayDate;
+  var splitData = EXO[split];
+  var done = getSessionDone(dateStr, split);
+  var container = $("session-ex-list");
   var html = "";
-  for(var i = 0; i < items.length; i++){
-    var it = items[i], owned = 0;
-    for(var j = 0; j < S.inventory.length; j++) if(S.inventory[j].id === it.id) owned++;
-    var canBuy = S.mp >= it.price && owned < it.maxQty;
-    var isMaxed = owned >= it.maxQty;
-    var btnClass = isMaxed ? "owned" : "";
-    var btnText = isMaxed ? "MAX ATTEINT" : "ACHETER";
-    html += '<div class="shop-item">' +
-      '<div class="shop-img">' + it.emoji + '</div>' +
-      '<div class="shop-info"><div class="shop-n">' + it.name + '</div><div class="shop-p"><div class="mp-icon"></div><div class="pv">' + it.price + ' MP</div></div><div class="shop-e">' + it.desc + '</div>' +
-      (owned > 0 ? '<div style="font-size:11px;color:var(--accent-light);margin-top:4px;font-weight:700;">En possession: ' + owned + "</div>" : "") +
-      '<button class="shop-btn ' + btnClass + '" data-itemid="' + it.id + '" ' + (canBuy?"":"disabled") + '>' + btnText + '</button></div></div>';
-  }
-  grid.innerHTML = html;
-  // EVENT DELEGATION sur shop-grid
-}
+  /* Progress bar */
+  var pct = Math.round((done.length / splitData.exos.length) * 100);
+  $("session-progress-fill").style.width = pct + "%";
+  $("session-progress-txt").textContent = done.length + "/" + splitData.exos.length + " exercices";
 
-function showInfo(exId){
-  var day = S.currentDay, list = EXO[day], ex = null;
-  // Cherche dans tous les jours si pas trouvé dans le jour courant
-  for(var k in EXO){
-    for(var i = 0; i < EXO[k].length; i++){
-      if(EXO[k][i].id === exId){ ex = EXO[k][i]; break; }
+  for(var i = 0; i < splitData.exos.length; i++){
+    var ex = splitData.exos[i];
+    var isDone = done.indexOf(ex.id) !== -1;
+    var isExpanded = S.expandedExo === ex.id;
+    var bonus = Math.floor(ex.mp * (S.streak * STREAK_BONUS));
+    var total = ex.mp + bonus;
+    html += '<div class="exo-row ' + (isDone ? "exo-done" : "") + (isExpanded ? " exo-expanded" : "") + '" data-exid="' + ex.id + '">' +
+      '<div class="exo-row-header">' +
+        '<div class="exo-row-left">' +
+          (isDone ? '<div class="exo-check">✓</div>' : '<div class="exo-num">' + (i+1) + '</div>') +
+          '<div class="exo-row-info">' +
+            '<div class="exo-row-name">' + ex.name + '</div>' +
+            '<div class="exo-row-meta">' + ex.muscle + ' · ' + ex.sets + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="exo-row-right">' +
+          '<div class="exo-mp-small">+' + total + ' MP</div>' +
+          '<div class="exo-chevron">' + (isExpanded ? '▲' : '▼') + '</div>' +
+        '</div>' +
+      '</div>';
+    if(isExpanded){
+      html += '<div class="exo-detail-panel">' +
+        '<div class="exo-detail-info">' + ex.info + '</div>' +
+        '<div class="exo-detail-grid">' +
+          '<div class="exo-detail-item"><div class="exo-detail-label">Series</div><div class="exo-detail-val">' + ex.sets + '</div></div>' +
+          '<div class="exo-detail-item"><div class="exo-detail-label">Repos</div><div class="exo-detail-val">' + ex.rest + '</div></div>' +
+          '<div class="exo-detail-item"><div class="exo-detail-label">Muscle</div><div class="exo-detail-val">' + ex.muscle + '</div></div>' +
+          '<div class="exo-detail-item"><div class="exo-detail-label">MP</div><div class="exo-detail-val">' + total + '</div></div>' +
+        '</div>' +
+        (!isDone ? '<button class="btn-start-exo btn-p btn-v" data-exid="' + ex.id + '">DEMARRER CET EXERCICE</button>' : '<div class="exo-done-label">Exercice termine ✓</div>') +
+      '</div>';
     }
-    if(ex) break;
+    html += '</div>';
   }
-  if(!ex) return;
-  $("info-title").textContent = ex.name;
-  $("info-desc").textContent = ex.info;
-  $("info-details").innerHTML =
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;">' +
-    '<div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:12px;border:1px solid var(--card-border);"><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:800;margin-bottom:4px;">Muscle</div><div style="font-size:14px;font-weight:700;color:#fff;">' + ex.muscle + '</div></div>' +
-    '<div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:12px;border:1px solid var(--card-border);"><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:800;margin-bottom:4px;">Categorie</div><div style="font-size:14px;font-weight:700;color:#fff;">' + ex.cat + '</div></div>' +
-    '<div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:12px;border:1px solid var(--card-border);"><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:800;margin-bottom:4px;">Series</div><div style="font-size:14px;font-weight:700;color:#fff;">' + ex.sets + '</div></div>' +
-    '<div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:12px;border:1px solid var(--card-border);"><div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:800;margin-bottom:4px;">Repos</div><div style="font-size:14px;font-weight:700;color:#fff;">' + ex.rest + '</div></div>' +
-    '</div>';
-  $("info-modal").classList.add("active");
+  container.innerHTML = html;
+  /* Check all done → show finish button */
+  if(done.length >= splitData.exos.length){
+    $("session-finish-wrap").style.display = "block";
+  } else {
+    $("session-finish-wrap").style.display = "none";
+  }
 }
 
+function toggleExo(exId){
+  S.expandedExo = S.expandedExo === exId ? null : exId;
+  renderSession();
+}
+
+/* ── WORKOUT TIMER ── */
 function startWorkout(exId){
   var ex = null;
-  for(var k in EXO){
-    for(var i = 0; i < EXO[k].length; i++){
-      if(EXO[k][i].id === exId){ ex = EXO[k][i]; break; }
+  outer: for(var k in EXO){
+    for(var i = 0; i < EXO[k].exos.length; i++){
+      if(EXO[k].exos[i].id === exId){ ex = EXO[k].exos[i]; break outer; }
     }
-    if(ex) break;
   }
   if(!ex) return;
   S.currentExo = ex;
@@ -267,11 +327,10 @@ function completeWorkout(){
   $("comp-mp").textContent = "+" + total + " MP";
   $("comp-time").textContent = timeStr;
   $("input-weight").value = "";
-  // Reset ressenti
   var rbs = document.querySelectorAll(".rb");
   for(var i = 0; i < rbs.length; i++) rbs[i].classList.remove("sel");
-  var defaultRb = document.querySelector('.rb[data-r="2"]');
-  if(defaultRb) defaultRb.classList.add("sel");
+  var def = document.querySelector('.rb[data-r="2"]');
+  if(def) def.classList.add("sel");
   S.selectedRessenti = 2;
   $("comp").classList.add("active");
 }
@@ -286,28 +345,55 @@ function submitWorkout(){
   S.minutes += mins + (secs > 30 ? 1 : 0);
   var need = S.level * XP_LVL;
   if(S.xp >= need){ S.xp -= need; S.level++; toast("Niveau " + S.level + " atteint !"); }
-  if(!S.completedToday[S.currentDay]) S.completedToday[S.currentDay] = [];
-  S.completedToday[S.currentDay].push(ex.id);
+  /* Mark exo done in session */
+  var key = sessionKey(S.activeDayDate, S.activeDay);
+  if(!S.completedDays[key]) S.completedDays[key] = [];
+  if(S.completedDays[key].indexOf(ex.id) === -1) S.completedDays[key].push(ex.id);
+  /* Streak + workouts */
   var today = new Date().toDateString(), last = S.lastWorkoutDate ? new Date(S.lastWorkoutDate).toDateString() : null;
   var yesterday = new Date(Date.now() - 86400000).toDateString();
   if(last !== today){
     if(last === yesterday) S.streak++;
     else S.streak = 1;
     S.lastWorkoutDate = new Date().toISOString();
-    S.workouts++;
   }
+  /* Count workout only when session complete */
+  var splitData = EXO[S.activeDay];
+  if(S.completedDays[key].length === splitData.exos.length) S.workouts++;
   var labels = {1:"Facile", 2:"Moyen", 3:"Dur"};
   S.history.push({
-    id: ex.id, exercise: ex.name, day: S.currentDay,
+    id: ex.id, exercise: ex.name, split: S.activeDay,
     date: new Date().toISOString(), duration: timeStr, mp: total, xp: XP_EXO,
     weight: $("input-weight").value || "-",
     ressenti: labels[S.selectedRessenti] || "Moyen"
   });
   save(); updateMP(); updateLevel(); updateStreak(); updateStats();
-  renderExercises(); renderHistory();
+  S.expandedExo = null;
+  renderSession();
+  renderHistory();
   $("comp").classList.remove("active");
   $("workout").classList.remove("active");
   toast("+" + total + " MP gagnes !");
+}
+
+/* ── SHOP ── */
+function renderShop(){
+  var grid = $("shop-grid"), items = [];
+  if(shopCat === "all"){ items = SHOP; }
+  else { for(var i = 0; i < SHOP.length; i++) if(SHOP[i].cat === shopCat) items.push(SHOP[i]); }
+  var html = "";
+  for(var i = 0; i < items.length; i++){
+    var it = items[i], owned = 0;
+    for(var j = 0; j < S.inventory.length; j++) if(S.inventory[j].id === it.id) owned++;
+    var canBuy = S.mp >= it.price && owned < it.maxQty;
+    var isMaxed = owned >= it.maxQty;
+    html += '<div class="shop-item">' +
+      '<div class="shop-img">' + it.emoji + '</div>' +
+      '<div class="shop-info"><div class="shop-n">' + it.name + '</div><div class="shop-p"><div class="mp-icon"></div><div class="pv">' + it.price + ' MP</div></div><div class="shop-e">' + it.desc + '</div>' +
+      (owned > 0 ? '<div style="font-size:11px;color:var(--accent-light);margin-top:4px;font-weight:700;">En possession: ' + owned + '</div>' : '') +
+      '<button class="shop-btn ' + (isMaxed?"owned":"") + '" data-itemid="' + it.id + '" ' + (canBuy?"":"disabled") + '>' + (isMaxed?"MAX ATTEINT":"ACHETER") + '</button></div></div>';
+  }
+  grid.innerHTML = html;
 }
 
 function buyItem(itemId){
@@ -324,6 +410,40 @@ function buyItem(itemId){
   toast(item.name + " achete !");
 }
 
+function renderHistory(){
+  var list = $("hist-list");
+  if(S.history.length === 0){
+    list.innerHTML = '<div style="padding:20px 0;text-align:center;color:var(--text-dim);font-size:13px;">Aucun historique encore</div>';
+    return;
+  }
+  var html = "";
+  for(var i = S.history.length-1; i >= 0; i--){
+    var h = S.history[i], d = new Date(h.date);
+    var ds = d.getDate() + " " + months[d.getMonth()];
+    html += '<div class="hist-item"><div class="hist-left"><div class="hist-ex">' + h.exercise + '</div><div class="hist-meta">' + ds + ' · ' + h.duration + ' · ' + h.ressenti + '</div></div><div class="hist-mp"><div class="mp-icon"></div><div class="hv">+' + h.mp + '</div></div></div>';
+  }
+  list.innerHTML = html;
+}
+
+function renderInventory(){
+  var list = $("inventory-list");
+  if(S.inventory.length === 0){
+    list.innerHTML = '<div style="padding:20px 0;text-align:center;color:var(--text-dim);font-size:13px;">Inventaire vide</div>';
+    return;
+  }
+  var g = {}, html = "";
+  for(var i = 0; i < S.inventory.length; i++){
+    var it = S.inventory[i];
+    if(!g[it.id]) g[it.id] = {name:it.name, emoji:it.emoji, price:it.price, qty:0};
+    g[it.id].qty++;
+  }
+  for(var k in g){
+    var it = g[k];
+    html += '<div class="hist-item"><div class="hist-left"><div class="hist-ex">' + it.emoji + ' ' + it.name + '</div><div class="hist-meta">Quantite: ' + it.qty + '</div></div><div class="hist-mp"><div class="mp-icon"></div><div class="hv">' + it.price + ' MP</div></div></div>';
+  }
+  list.innerHTML = html;
+}
+
 function goTo(name){
   var screens = document.querySelectorAll(".screen");
   for(var i = 0; i < screens.length; i++) screens[i].classList.remove("active");
@@ -333,35 +453,27 @@ function goTo(name){
   document.querySelector('.nav-item[data-screen="' + name + '"]').classList.add("a");
   if(name === "profile"){ updateStats(); renderHistory(); }
   if(name === "shop"){ renderShop(); renderInventory(); }
-}
-
-function setDay(day){
-  S.currentDay = day;
-  var pills = document.querySelectorAll(".day-pill");
-  for(var i = 0; i < pills.length; i++) pills[i].classList.remove("active");
-  document.querySelector('.day-pill[data-day="' + day + '"]').classList.add("active");
-  renderExercises();
-}
-
-function scrollToEx(){
-  $("ex-list").scrollIntoView({behavior:"smooth"});
+  if(name === "training"){
+    if(S.view === "calendar") renderCalendar();
+    else renderSession();
+  }
 }
 
 function resetAll(){
   if(!confirm("Reinitialiser toute la progression ?")) return;
   S.mp=0; S.xp=0; S.level=1; S.streak=0; S.lastWorkoutDate=null;
   S.workouts=0; S.minutes=0; S.mpEarned=0;
-  S.history=[]; S.inventory=[]; S.completedToday={};
-  S.currentDay="A"; S.currentExo=null;
-  S.timerStart=0; S.timerInterval=null; S.selectedRessenti=2;
+  S.history=[]; S.inventory=[]; S.completedDays={};
+  S.currentExo=null; S.timerStart=0; S.timerInterval=null; S.selectedRessenti=2;
+  S.view="calendar"; S.activeDay=null; S.activeDayDate=null; S.expandedExo=null;
   save(); updateMP(); updateLevel(); updateStreak(); updateStats();
-  renderExercises(); renderShop(); renderHistory(); renderInventory();
+  renderCalendar(); renderShop(); renderHistory(); renderInventory();
+  $("view-session").style.display = "none";
+  $("view-calendar").style.display = "block";
   toast("Progression reinitialisee");
 }
 
-// ============================================================
-// INIT
-// ============================================================
+/* ══════════════ INIT ══════════════ */
 load();
 checkStreak();
 updateMP();
@@ -369,26 +481,24 @@ updateLevel();
 updateStreak();
 updateStats();
 updateCountdown();
-renderExercises();
+renderCalendar();
 renderShop();
 renderHistory();
 renderInventory();
 
-// --- NAVIGATION (event delegation via nav) ---
+/* Restore session view if was in session */
+if(S.view === "session" && S.activeDay && S.activeDayDate){
+  openSession(S.activeDay, S.activeDayDate);
+}
+
+/* ── NAVIGATION ── */
 document.querySelector('.nav').addEventListener('click', function(e){
   var btn = e.target.closest('.nav-item');
   if(!btn) return;
   goTo(btn.getAttribute('data-screen'));
 });
 
-// --- DAY PILLS ---
-document.querySelector('.day-selector').addEventListener('click', function(e){
-  var pill = e.target.closest('.day-pill');
-  if(!pill) return;
-  setDay(pill.getAttribute('data-day'));
-});
-
-// --- SHOP CATEGORIES ---
+/* ── SHOP CATEGORIES ── */
 document.querySelector('.shop-cats').addEventListener('click', function(e){
   var cat = e.target.closest('.shop-cat');
   if(!cat) return;
@@ -399,35 +509,42 @@ document.querySelector('.shop-cats').addEventListener('click', function(e){
   renderShop();
 });
 
-// --- EXERCISE LIST (EVENT DELEGATION — survit aux re-renders) ---
-document.getElementById('ex-list').addEventListener('click', function(e){
-  var startBtn = e.target.closest('.btn-start');
+/* ── SHOP GRID ── */
+document.getElementById('shop-grid').addEventListener('click', function(e){
+  var btn = e.target.closest('.shop-btn');
+  if(btn && !btn.disabled) buyItem(btn.getAttribute('data-itemid'));
+});
+
+/* ── CALENDAR ── */
+document.getElementById('calendar-list').addEventListener('click', function(e){
+  var btn = e.target.closest('.cal-btn');
+  if(btn){
+    openSession(btn.getAttribute('data-split'), btn.getAttribute('data-date'));
+  }
+});
+
+/* ── SESSION : retour + expand exos ── */
+document.getElementById('btn-back-session').addEventListener('click', function(){ closeSession(); });
+
+document.getElementById('session-ex-list').addEventListener('click', function(e){
+  /* DEMARRER button */
+  var startBtn = e.target.closest('.btn-start-exo');
   if(startBtn && !startBtn.disabled){
     startWorkout(startBtn.getAttribute('data-exid'));
     return;
   }
-  var infoBtn = e.target.closest('.btn-info');
-  if(infoBtn){
-    showInfo(infoBtn.getAttribute('data-exid'));
-    return;
-  }
+  /* Toggle expand */
+  var row = e.target.closest('.exo-row');
+  if(row) toggleExo(row.getAttribute('data-exid'));
 });
 
-// --- SHOP GRID (EVENT DELEGATION) ---
-document.getElementById('shop-grid').addEventListener('click', function(e){
-  var btn = e.target.closest('.shop-btn');
-  if(btn && !btn.disabled){
-    buyItem(btn.getAttribute('data-itemid'));
-  }
-});
-
-// --- WORKOUT CONTROLS ---
+/* ── WORKOUT CONTROLS ── */
 $("btn-complete").addEventListener("click", function(){ completeWorkout(); });
 $("btn-cancel").addEventListener("click", function(){ stopWorkout(); toast("Exercice annule"); });
 $("w-close").addEventListener("click", function(){ stopWorkout(); });
 $("btn-submit").addEventListener("click", function(){ submitWorkout(); });
 
-// --- RESSENTI (event delegation sur comp) ---
+/* ── RESSENTI ── */
 document.getElementById('comp').addEventListener('click', function(e){
   var rb = e.target.closest('.rb');
   if(!rb) return;
@@ -437,18 +554,13 @@ document.getElementById('comp').addEventListener('click', function(e){
   S.selectedRessenti = parseInt(rb.getAttribute('data-r'));
 });
 
-// --- INFO MODAL ---
-$("btn-info-close").addEventListener("click", function(){ $("info-modal").classList.remove("active"); });
-
-// --- HERO SCROLL ---
-$("btn-scroll").addEventListener("click", function(){ scrollToEx(); });
-
-// --- RESET ---
+/* ── RESET ── */
 $("btn-reset").addEventListener("click", function(){ resetAll(); });
 
-// Mark loaded
+/* ── COUNTDOWN ── */
+setInterval(updateCountdown, 3600000);
+
+/* Mark loaded */
 $("js-debug").textContent = "JS OK";
 $("js-debug").style.background = "#22c55e";
 setTimeout(function(){ $("js-debug").style.opacity = "0"; }, 2000);
-
-setInterval(updateCountdown, 3600000);
