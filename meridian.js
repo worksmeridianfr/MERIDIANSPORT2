@@ -151,7 +151,7 @@ function renderInventory(){
   }
   for(var k in g){
     var it = g[k];
-    html += '<div class="hist-item"><div class="hist-left"><div class="hist-ex">' + it.emoji + " " + it.name + '</div><div class="hist-meta">Quantite: ' + it.qty + "</div></div><div class="hist-mp"><div class="mp-icon"></div><div class="hv">" + it.price + " MP</div></div></div>";
+    html += '<div class="hist-item"><div class="hist-left"><div class="hist-ex">' + it.emoji + ' ' + it.name + '</div><div class="hist-meta">Quantite: ' + it.qty + '</div></div><div class="hist-mp"><div class="mp-icon"></div><div class="hv">' + it.price + ' MP</div></div></div>';
   }
   list.innerHTML = html;
 }
